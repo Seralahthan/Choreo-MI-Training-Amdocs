@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/healthcare" name="HealthcareAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" protocol="https" uri-template="/categories/{category}/reserve">
+        <inSequence>
+            <log category="INFO" level="custom">
+                <property name="Category" expression="$ctx:uri.var.category" />
+            </log>
+            <property name="uri.var.hospitalid" scope="default" type="STRING"
+                expression="json-eval($.hospital_id)" />
+            <property name="email_id" scope="default" type="STRING"
+                expression="json-eval($.patient.email)" />
+            <call >
+                <endpoint key="HospitalServicesEP" />
+            </call>
+            <property name="hospital_response" scope="default" type="STRING"
+                expression="json-eval($)" />
+            <script language="js">
+                <![CDATA[
+                var jsonPayload = mc.getProperty("hospital_response");
+                var beautifiedJson = JSON.stringify(JSON.parse(jsonPayload), null, 4);
+                mc.setProperty("hospital_response", beautifiedJson);
+                ]]>
+            </script>
+            <email.send configKey="AmdocsEmailConnection">
+                <inlineImages>[]</inlineImages>
+                <contentType>application/json</contentType>
+                <encoding>UTF-8</encoding>
+                <contentTransferEncoding>Base64</contentTransferEncoding>
+                <from>emailaddress</from>
+                <to>{$ctx:email_id}</to>
+                <subject>Appoint Status</subject>
+                <content>{$ctx:hospital_response}</content>
+            </email.send>
+            <respond />
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>

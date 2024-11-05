@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="AmdocsEmailConnection" xmlns="http://ws.apache.org/ns/synapse">
+  <email.init>
+    <connectionType>SMTPS</connectionType>
+    <name>AmdocsEmailConnection</name>
+    <host>smtp.gmail.com</host>
+    <port>465</port>
+    <username>emailaddress</username>
+    <password>password</password>
+    <requireTLS>false</requireTLS>
+    <requireAuthentication>true</requireAuthentication>
+  </email.init>
+</localEntry>
