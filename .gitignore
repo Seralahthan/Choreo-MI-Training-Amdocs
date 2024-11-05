@@ -1,3 +1,4 @@
+# Ignore Maven target directory
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -15,4 +16,18 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# Ignore build-artifacts directory
 **/build-artifacts/
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
