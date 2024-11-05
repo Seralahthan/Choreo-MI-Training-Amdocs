@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="AmdocsFileInbound-sftpWriteSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="INFO" level="custom">
+        <property name="Message" value="Executing the sftpWriteSequence" />
+    </log>
+    <property name="fileName" scope="default" type="STRING" expression="//FileName/text()" />
+    <log category="INFO" level="custom">
+        <property name="fileName" expression="$ctx:fileName" />
+    </log>
+    <property name="filePath" scope="default" type="STRING" expression="fn:concat('/', $ctx:fileName, '.xml')" />
+
+    <file.write configKey="AmdocsFileInbound-sftpFileConnection">
+        <contentOrExpression>{//Message}</contentOrExpression>
+        <mimeType>text/xml</mimeType>
+        <writeMode>Overwrite</writeMode>
+        <encoding>UTF-8</encoding>
+        <compress>false</compress>
+        <appendNewLine>false</appendNewLine>
+        <enableStreaming>false</enableStreaming>
+        <enableLock>false</enableLock>
+        <updateLastModified>true</updateLastModified>
+        <maxRetries>0</maxRetries>
+        <retryDelay>0</retryDelay>
+        <includeResultTo>Message Body</includeResultTo>
+        <filePath>{$ctx:filePath}</filePath>
+    </file.write>
+    <log category="INFO" level="custom">
+        <property name="fileWriteResults" expression="$body" />
+    </log>
+</sequence>

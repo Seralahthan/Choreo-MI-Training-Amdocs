@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="AmdocsFileInboundEP-inboundSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="INFO" level="custom">
+        <property name="Message" value="Executing the Inbound Sequence" />
+    </log>
+    <clone id="AmdocsFileInboundClone">
+        <target>
+            <sequence>
+                <sequence key="AmdocsFileInbound-sftpWriteSequence" />
+            </sequence>
+        </target>
+        <target>
+            <sequence>
+                <sequence key="AmdocsFileInbound-databaseSequence" />
+            </sequence>
+        </target>
+        <target>
+            <sequence>
+                <sequence key="AmdocsFileInbound-sendMailSequence" />
+            </sequence>
+        </target>
+    </clone>
+</sequence>

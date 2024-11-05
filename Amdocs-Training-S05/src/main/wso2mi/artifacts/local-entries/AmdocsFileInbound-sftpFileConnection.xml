@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="AmdocsFileInbound-sftpFileConnection" xmlns="http://ws.apache.org/ns/synapse">
+  <file.init>
+    <connectionType>SFTP</connectionType>
+    <name>AmdocsFileInbound-sftpFileConnection</name>
+    <port>2022</port>
+    <encodePassword>false</encodePassword>
+    <setAvoidPermission>true</setAvoidPermission>
+    <strictHostKeyChecking>false</strictHostKeyChecking>
+    <sftpConnectionTimeout>100000</sftpConnectionTimeout>
+    <sftpSessionTimeout>150000</sftpSessionTimeout>
+    <fileLockScheme>Local</fileLockScheme>
+    <host>sftp://localhost</host>
+    <username>sftpgouser</username>
+    <password>qazwsx</password>
+    <userDirIsRoot>true</userDirIsRoot>
+    <workingDir>./</workingDir>
+  </file.init>
+</localEntry>
