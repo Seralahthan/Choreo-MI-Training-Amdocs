@@ -5,10 +5,9 @@
     </log>
     <property name="fileName" scope="default" type="STRING" expression="//FileName/text()" />
     <log category="INFO" level="custom">
-        <property name="fileName" expression="$ctx:fileName" />
+        <property name="logFileName" expression="$ctx:fileName" />
     </log>
     <property name="filePath" scope="default" type="STRING" expression="fn:concat('/', $ctx:fileName, '.xml')" />
-
     <file.write configKey="AmdocsFileInbound-sftpFileConnection">
         <contentOrExpression>{//Message}</contentOrExpression>
         <mimeType>text/xml</mimeType>

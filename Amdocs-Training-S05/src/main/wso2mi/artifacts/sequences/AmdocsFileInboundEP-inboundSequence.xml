@@ -7,16 +7,19 @@
         <target>
             <sequence>
                 <sequence key="AmdocsFileInbound-sftpWriteSequence" />
+                <sequence key="AmdocsFileInbound-aggregateCloneSequence" />
             </sequence>
         </target>
         <target>
             <sequence>
                 <sequence key="AmdocsFileInbound-databaseSequence" />
+                <sequence key="AmdocsFileInbound-aggregateCloneSequence" />
             </sequence>
         </target>
         <target>
             <sequence>
                 <sequence key="AmdocsFileInbound-sendMailSequence" />
+                <sequence key="AmdocsFileInbound-aggregateCloneSequence" />
             </sequence>
         </target>
     </clone>

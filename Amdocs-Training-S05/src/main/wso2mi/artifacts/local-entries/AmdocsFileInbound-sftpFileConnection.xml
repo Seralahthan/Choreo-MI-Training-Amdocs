@@ -5,12 +5,12 @@
     <name>AmdocsFileInbound-sftpFileConnection</name>
     <port>2022</port>
     <encodePassword>false</encodePassword>
-    <setAvoidPermission>true</setAvoidPermission>
+    <setAvoidPermission>false</setAvoidPermission>
     <strictHostKeyChecking>false</strictHostKeyChecking>
     <sftpConnectionTimeout>100000</sftpConnectionTimeout>
     <sftpSessionTimeout>150000</sftpSessionTimeout>
     <fileLockScheme>Local</fileLockScheme>
-    <host>sftp://localhost</host>
+    <host>localhost</host>
     <username>sftpgouser</username>
     <password>qazwsx</password>
     <userDirIsRoot>true</userDirIsRoot>

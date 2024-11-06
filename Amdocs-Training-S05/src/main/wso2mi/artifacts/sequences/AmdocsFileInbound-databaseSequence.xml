@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="AmdocsFileInbound-databaseSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="INFO" level="custom">
+        <property name="Message" value="Executing the databaseSequence" />
+    </log>
+    <iterate expression="//Records/Record" id="AmdocsFileInboundIterate" sequential="true">
+        <target>
+            <sequence>
+                <dbreport>
+                    <connection>
+                        <pool>
+                            <driver>com.mysql.cj.jdbc.Driver</driver>
+                            <url>jdbc:mysql://localhost:3306/amdocs_db?useSSL=false&amp;verifyServerCertificate=false&amp;allowPublicKeyRetrieval=true</url>
+                            <user>mysqluser</user>
+                            <password>mysqlpassword</password>
+                        </pool>
+                    </connection>
+                    <statement>
+                        <sql><![CDATA[INSERT INTO INFO VALUES(?, ?, ?)]]></sql>
+                        <parameter expression="//Record/Name/text()" type="VARCHAR" />
+                        <parameter expression="//Record/SurName/text()" type="VARCHAR" />
+                        <parameter expression="//Record/Phone/text()" type="VARCHAR" />
+                    </statement>
+                </dbreport>
+                <aggregate id="AmdocsFileInboundIterate">
+                    <completeCondition timeout="0">
+                        <messageCount max="-1" min="-1" />
+                    </completeCondition>
+                    <onComplete aggregateElementType="root" expression="$body/*">
+                        <log category="INFO" level="custom">
+                            <property name="Message" value="Inserted the records to the database" />
+                        </log>
+                        <drop />
+                    </onComplete>
+                </aggregate>
+            </sequence>
+        </target>
+    </iterate>
 
 </sequence>

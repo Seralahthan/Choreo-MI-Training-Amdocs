@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="AmdocsFileInbound-aggregateCloneSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <aggregate id="AmdocsFileInboundClone">
+        <completeCondition timeout="0">
+            <messageCount max="-1" min="-1" />
+        </completeCondition>
+        <onComplete aggregateElementType="root" expression="$body/*">
+            <log category="INFO" level="custom">
+                <property name="Message" value="Executing the aggregateCloneSequence" />
+            </log>
+            <drop />
+        </onComplete>
+    </aggregate>
+</sequence>

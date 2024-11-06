@@ -1,0 +1,26 @@
+<data name="AmdocsRDBMSDataService" serviceNamespace="" serviceGroup="" transports="https"
+    disableStreaming="true">
+    <description />
+    <config id="AmdocsRDBMSDataSource">
+        <property name="driverClassName">com.mysql.jdbc.Driver</property>
+        <property name="url">jdbc:mysql://localhost:3306/Employees</property>
+        <property name="username">mysqluser</property>
+        <property name="password">mysqlpassword</property>
+    </config>
+    <query id="getEmployeeDetails" useConfig="AmdocsRDBMSDataSource">
+        <sql>SELECT * FROM Employees where EmployeeNumber=:empNum</sql>
+        <param name="empNum" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <result element="Employees">
+            <element name="employeeNum" column="EmployeeNumber" xsdType="string" exportType="Scalar" requiredRoles="" />
+            <element name="firstName" column="FirstName" xsdType="string" exportType="Scalar" requiredRoles="" />
+            <element name="lastName" column="LastName" xsdType="string" exportType="Scalar" requiredRoles="" />
+            <element name="email" column="Email" xsdType="string" exportType="Scalar" requiredRoles="" />
+            <element name="salary" column="Salary" xsdType="string" exportType="Scalar" requiredRoles="" />
+        </result>
+    </query>
+    <resource method="GET" path="/AmdocsEmployee/{EmployeeNumber}" disableStreaming="true">
+        <call-query href="getEmployeeDetails">
+            <with-param name="empNum" query-param="EmployeeNumber" />
+        </call-query>
+    </resource>
+</data>

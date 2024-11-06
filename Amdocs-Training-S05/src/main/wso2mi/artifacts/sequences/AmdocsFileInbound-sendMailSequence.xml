@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="AmdocsFileInbound-sendMailSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-
+    <log category="INFO" level="custom">
+        <property name="Message" value="Executing the sendMailSequence" />
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="text/html" />
+    <property name="ContentType" scope="axis2" type="STRING" value="text/html" />
+    <property name="Subject" scope="transport" type="STRING" value="Amdocs FileInbound File Received" />
+    <property name="OUT_ONLY" scope="default" type="STRING" value="true" />
+    <send>
+        <endpoint key="MailEP" />
+    </send>
 </sequence>
