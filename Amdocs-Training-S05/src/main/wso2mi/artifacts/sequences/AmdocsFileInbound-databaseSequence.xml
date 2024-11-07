@@ -10,7 +10,7 @@
                     <connection>
                         <pool>
                             <driver>com.mysql.cj.jdbc.Driver</driver>
-                            <url>jdbc:mysql://localhost:3306/amdocs_db?useSSL=false&amp;verifyServerCertificate=false&amp;allowPublicKeyRetrieval=true</url>
+                            <url>jdbc:mysql://localhost:3306/amdocs_db</url>
                             <user>mysqluser</user>
                             <password>mysqlpassword</password>
                         </pool>
